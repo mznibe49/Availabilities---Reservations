@@ -16,10 +16,8 @@ import java.util.Set;
 @Service
 public class ReservationService {
 
-    @Autowired
     ReservationRepository reservationRepository;
 
-    @Autowired
     AvailabilityRepository availabilityRepository;
 
     private boolean isOverLapping(Reservation newReservation, Reservation existingReservation){

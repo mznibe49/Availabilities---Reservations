@@ -6,14 +6,12 @@ import com.giskard.project.repositories.AvailabilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class AvailabilityService {
 
-    @Autowired
     AvailabilityRepository availabilityRepository;
 
     public Optional<List<Availability>> loadAllAvailabilities() {
