@@ -5,7 +5,7 @@ import com.giskard.project.exceptions.GiskardExceptionStatus;
 
 public class InvalidTimeSlotException extends GiskardException {
 
-  public InvalidTimeSlotException() {
-    super("Start must be before end", GiskardExceptionStatus.BAD_REQUEST);
+  public InvalidTimeSlotException(String str) {
+    super(str, GiskardExceptionStatus.BAD_REQUEST);
   }
 }

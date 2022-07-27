@@ -2,6 +2,7 @@ package com.giskard.project.domain;
 
 import com.giskard.project.exceptions.domain.InvalidTimeSlotException;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
 public class TimeSlot {
@@ -19,14 +20,20 @@ public class TimeSlot {
     }
 
     if (start.isAfter(end)) {
-      throw new InvalidTimeSlotException();
+      throw new InvalidTimeSlotException("Start must be before end");
+    }
+
+    if (!isSameDay(start, end)){
+      throw new InvalidTimeSlotException("Start and End date must be in the same day");
     }
 
     this.start = start;
     this.end = end;
   }
 
-  //
+  public boolean isSameDay(LocalDateTime start, LocalDateTime end){
+    return (start.getYear() == end.getYear() && start.getDayOfYear() == end.getDayOfYear());
+  }
 
   public boolean contains(TimeSlot other) {
     return (this.start.isBefore(other.start) || this.start.isEqual(other.start))
@@ -40,6 +47,8 @@ public class TimeSlot {
 
     return this.contains(other.start) || this.contains(other.end);
   }
+
+  // public boolean notAllowed
 
   private boolean contains(LocalDateTime date) {
     return date.isAfter(this.start) && date.isBefore(this.end);
