@@ -17,9 +17,9 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary btn-block" type="submit" :disabled="loading">
+        <button class="btn btn-primary btn-block" type="submit" :disabled="creationLoading">
             <span
-                v-show="loading"
+                v-show="creationLoading"
                 class="spinner-border spinner-border-sm"
             ></span>
           <span>create</span>
@@ -44,9 +44,9 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary btn-block" type="submit" :disabled="loading">
+        <button class="btn btn-primary btn-block" type="submit" :disabled="deletionLoading">
             <span
-                v-show="loading"
+                v-show="deletionLoading"
                 class="spinner-border spinner-border-sm"
             ></span>
           <span>delete</span>
@@ -101,7 +101,8 @@ export default {
     });
 
     return {
-      loading: false,
+      creationLoading: false,
+      deletionLoading: false,
       creationMessage: "",
       deletionMessage: "",
       creationSchema,
@@ -117,7 +118,7 @@ export default {
     },
 
     handleCreation(availability){
-      this.loading = true;
+      this.creationLoading = true;
 
       let start_date = this.formatDate(availability.start_date);
       let end_date = this.formatDate(availability.end_date);
@@ -128,7 +129,7 @@ export default {
             location.reload();
           },
           (error) => {
-            this.loading = false;
+            this.creationLoading = false;
             this.creationMessage =
                 (error.response &&
                     error.response.data &&
@@ -139,14 +140,14 @@ export default {
       );
     },
     handleDeletion(id){
-      this.loading = true;
+      this.deletionLoading = true;
       availabilityService.deleteAvailability(id.av_id).then(
           (response) => {
             this.content = response;
             location.reload();
           },
           (error) => {
-            this.loading = false;
+            this.deletionLoading = false;
             this.deletionMessage =
                 (error.response &&
                     error.response.data &&

@@ -35,9 +35,9 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary btn-block" type="submit" :disabled="loading">
+        <button class="btn btn-primary btn-block" type="submit" :disabled="creationLoading">
             <span
-                v-show="loading"
+                v-show="creationLoading"
                 class="spinner-border spinner-border-sm"
             ></span>
           <span>create</span>
@@ -66,9 +66,9 @@
       </div>
 
       <div class="form-group">
-        <button class="btn btn-primary btn-block" type="submit" :disabled="loading">
+        <button class="btn btn-primary btn-block" type="submit" :disabled="deletionLoading">
             <span
-                v-show="loading"
+                v-show="deletionLoading"
                 class="spinner-border spinner-border-sm"
             ></span>
           <span>delete</span>
@@ -122,7 +122,8 @@ export default {
     });
 
     return {
-      loading: false,
+      creationLoading: false,
+      deletionLoading: false,
       creationMessage: "",
       deletionMessage: "",
       creationSchema,
@@ -138,8 +139,7 @@ export default {
     },
 
     handleCreation(reservation){
-      console.log("b4 : ");
-      this.loading = true;
+      this.creationLoading = true;
 
       let id = reservation.av_id;
       let start_date = this.formatDate(reservation.start_date);
@@ -147,15 +147,13 @@ export default {
       let email = reservation.creation_email;
       let title = reservation.title;
 
-      console.log("id : ",id);
       reservationService.createReservation(id, start_date, end_date, email, title).then(
           (response) => {
             this.content = response;
             location.reload();
           },
           (error) => {
-            console.log("err : ");
-            this.loading = false;
+            this.creationLoading = false;
             this.creationMessage =
                 (error.response &&
                     error.response.data &&
@@ -166,13 +164,13 @@ export default {
       );
     },
     handleDeletion(reservationDeletion){
-      this.loading = true;
+      this.deletionLoading = true;
       reservationService.deleteReservation(reservationDeletion.res_id, reservationDeletion.deletion_email).then(
           (response) => {
             this.content = response;
           },
           (error) => {
-            this.loading = false;
+            this.deletionLoading = false;
             this.deletionMessage =
                 (error.response &&
                     error.response.data &&
