@@ -3,6 +3,7 @@ package com.giskard.project.services;
 import com.giskard.project.controllers.payload.request.AvailabilityRequest;
 import com.giskard.project.domain.TimeSlot;
 import com.giskard.project.exceptions.domain.NoSuchAvailabilityException;
+import com.giskard.project.exceptions.domain.OverlappingAvailabilityException;
 import com.giskard.project.exceptions.domain.OverlappingReservationException;
 import com.giskard.project.models.Availability;
 import com.giskard.project.repositories.AvailabilityRepository;
@@ -42,7 +43,7 @@ public class AvailabilityService {
                       TimeSlot availabilityTimeSlot = new TimeSlot(a.getStart(), a.getEnd());
 
                       if (availabilityTimeSlot.isOverlappedBy(newAvailabilityTimeSlot)) {
-                        throw new OverlappingReservationException();
+                        throw new OverlappingAvailabilityException();
                       }
                     });
 
