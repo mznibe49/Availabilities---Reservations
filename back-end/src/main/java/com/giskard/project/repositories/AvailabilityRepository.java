@@ -11,18 +11,8 @@ import java.util.Optional;
 @Repository
 public interface AvailabilityRepository extends JpaRepository<Availability, Long> {
 
-  List<Availability> findAllByOrderByStartDesc();
+  List<Availability> findAllByOrderByStartAsc();
 
   List<Availability> findAllByStartAfterAndEndBefore(LocalDateTime start, LocalDateTime end);
 
-  Optional<Availability> findByStartBeforeAndEndAfter(LocalDateTime start, LocalDateTime end);
-
-  // use this methode with start & end
-  //                       start & start
-  //                       end & end
-  boolean existsAvailabilityByStartBeforeAndEndAfter(LocalDateTime start, LocalDateTime end);
-
-  boolean existsAvailabilityByStartAfterAndEndBefore(LocalDateTime start, LocalDateTime end);
-
-  boolean deleteAvailabilityByStartAndEnd(LocalDateTime start, LocalDateTime end);
 }

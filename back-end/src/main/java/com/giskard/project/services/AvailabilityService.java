@@ -23,7 +23,7 @@ public class AvailabilityService {
   }
 
   public List<Availability> loadAllAvailabilities() {
-    return availabilityRepository.findAllByOrderByStartDesc();
+    return availabilityRepository.findAllByOrderByStartAsc();
   }
 
   public Availability createAvailability(AvailabilityRequest newAvailability) {

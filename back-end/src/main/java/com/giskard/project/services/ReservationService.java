@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ReservationService {
@@ -24,6 +26,10 @@ public class ReservationService {
       ReservationRepository reservationRepository, AvailabilityRepository availabilityRepository) {
     this.reservationRepository = reservationRepository;
     this.availabilityRepository = availabilityRepository;
+  }
+
+  public List<Reservation> loadAllReservations() {
+    return reservationRepository.findAllByOrderByStartAsc();
   }
 
   @Transactional
