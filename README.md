@@ -14,7 +14,7 @@ npm run serve
 
 
 ## Project setup (back-end side)
-go into /back-end folder, then run the next commands : 
+go into /back-end folder, then run the next command : 
 
 ```
 mvn spring-boot:run
