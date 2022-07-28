@@ -7,8 +7,7 @@ import ReservationManager from "@/components/ReservationManager";
 const routes = [
     {
         path: "/",
-        name: "availabilities",
-        component: Availabilities,
+        redirect: '/availabilities'
     },
     {
         path: "/availabilities",
